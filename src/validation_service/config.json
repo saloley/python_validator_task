@@ -1,0 +1,5 @@
+{
+  "raw": ["column1", "column2", "column3"],
+  "source": ["id", "name", "value"],
+  "static": ["timestamp", "data"]
+}
