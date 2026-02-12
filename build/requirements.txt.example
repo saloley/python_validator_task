@@ -1,0 +1,8 @@
+# Project dependencies for Python File Validator
+pandas
+python-dotenv
+typing-extensions
+
+# Optional dependencies (commented out, uncomment if needed)
+# openpyxl
+# pyarrow
