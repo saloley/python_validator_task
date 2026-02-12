@@ -1,0 +1,2 @@
+error_level,error_text,file_name,folder_name,line_number
+error,Required column 'column2' is missing,test_raw_missing_column.csv,raw,0

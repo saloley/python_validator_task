@@ -258,10 +258,11 @@ class FileValidator:
             timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
             report_filename = f"{report_prefix}_{timestamp}.csv"
             
-            static_folder = self.base_path / os.getenv('STATIC_FOLDER', 'static')
-            static_folder.mkdir(parents=True, exist_ok=True)
-            
-            output_path = static_folder / report_filename
+            report_folder = os.getenv('REPORT_FOLDER', 'raw/reports')
+            reports_folder = self.base_path / report_folder
+            reports_folder.mkdir(parents=True, exist_ok=True)
+    
+            output_path = reports_folder / report_filename
         
         logger.info(f"Generating validation report: {output_path}")
         
