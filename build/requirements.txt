@@ -2,6 +2,7 @@
 pandas
 python-dotenv
 typing-extensions
+pydantic
 
 # Optional dependencies (commented out, uncomment if needed)
 # openpyxl

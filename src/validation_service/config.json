@@ -1,4 +1,61 @@
 {
-  "raw": ["column1", "column2", "column3"],
-  "source": ["id", "name", "value"]
+  "raw": {
+    "required_columns": ["column1", "column2", "column3"]
+  },
+  "source": {
+    "required_columns": ["id", "name", "value"],
+    "files": {
+      "users.csv": {
+        "columns": {
+          "id": {
+            "type": "int",
+            "nullable": false
+          },
+          "name": {
+            "type": "str",
+            "nullable": false
+          },
+          "email": {
+            "type": "str",
+            "nullable": false
+          },
+          "age": {
+            "type": "int",
+            "nullable": true
+          },
+          "created_at": {
+            "type": "datetime",
+            "nullable": false
+          }
+        }
+      },
+      "products.csv": {
+        "columns": {
+          "id": {
+            "type": "int",
+            "nullable": false
+          },
+          "name": {
+            "type": "str",
+            "nullable": false
+          },
+          "price": {
+            "type": "float",
+            "nullable": false
+          },
+          "quantity": {
+            "type": "int",
+            "nullable": true
+          },
+          "active": {
+            "type": "bool",
+            "nullable": false
+          }
+        }
+      }
+    }
+  },
+  "static": {
+    "required_columns": ["timestamp", "data"]
+  }
 }
