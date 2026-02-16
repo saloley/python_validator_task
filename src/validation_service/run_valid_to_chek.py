@@ -1,8 +1,10 @@
 import os
+import sys
 import json
 from pathlib import Path
 from dotenv import load_dotenv
-from .validator import FileValidator
+from .raw_validator import RawValidator
+from .source_validator import SourceValidator
 from .logger_config import logger
 
 
@@ -33,16 +35,27 @@ def load_required_columns_config(config_path: Path) -> dict:
 
 
 def main():
-    logger.info("step1")
+    logger.info("Starting validation service")
 
     try:
+        # Get validation type from command line arguments
+        validation_type = 'raw'  # Default
+        if len(sys.argv) > 1:
+            validation_type = sys.argv[1].lower()
+            if validation_type not in ['raw', 'source', 'static']:
+                logger.warning(
+                    f"Unknown validation type '{validation_type}', using 'raw' as default"
+                )
+                validation_type = 'raw'
+        
+        logger.info(f"Validation type: {validation_type.upper()}")
+        
         # Get configuration from environment
         base_path = os.getenv('BASE_PATH', '')
         csv_delimiter = os.getenv('CSV_DELIMITER', ',')
-        csv_encoding = os.getenv('CSV_ENCODING', '')
+        csv_encoding = os.getenv('CSV_ENCODING', 'utf-8')
 
         # Resolve base path relative to project root
-        # Assuming this script is in src/validation_service/
         project_root = Path(__file__).parent.parent.parent
         full_base_path = project_root / base_path
 
@@ -55,17 +68,25 @@ def main():
         config_file = Path(__file__).parent / 'config.json'
         required_columns_config = load_required_columns_config(config_file)
 
-        # Create validator
-        validator = FileValidator(
-            base_path=str(full_base_path),
-            required_columns_config=required_columns_config,
-            csv_delimiter=csv_delimiter,
-            csv_encoding=csv_encoding
-        )
+        # Create validator based on type
+        if validation_type == 'source':
+            validator = SourceValidator(
+                base_path=str(full_base_path),
+                required_columns_config=required_columns_config,
+                csv_delimiter=csv_delimiter,
+                csv_encoding=csv_encoding
+            )
+        else:
+            # so far step3 last so no chek for 'raw'
+            validator = RawValidator(
+                base_path=str(full_base_path),
+                required_columns_config=required_columns_config,
+                csv_delimiter=csv_delimiter,
+                csv_encoding=csv_encoding
+            )
 
         # Run validation
         logger.info("STARTING VALIDATION PROCESS")
-
 
         validation_passed = validator.validate_all_folders()
 
@@ -87,14 +108,14 @@ def main():
 
         # Exit status
         if validation_passed and summary['error'] == 0:
-            logger.info("\n VALIDATION PASSED")
+            logger.info("\nVALIDATION PASSED")
             return 0
         else:
-            logger.warning("\n VALIDATION FAILED")
+            logger.warning("\nVALIDATION FAILED")
             return 1
 
     except Exception as e:
-        logger.error(f"\n VALIDATION ERROR: {e}", exc_info=True)
+        logger.error(f"\nVALIDATION ERROR: {e}", exc_info=True)
         return 1
 
 
