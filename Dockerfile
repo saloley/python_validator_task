@@ -32,4 +32,4 @@ COPY src/ /app/src/
 COPY .env /app/.env
 
 # Set the default command
-CMD ["python", "-m", "src.validation_service.run_validation"]
+CMD ["python", "-m", "src.validation_service.run_valid_to_check"]
