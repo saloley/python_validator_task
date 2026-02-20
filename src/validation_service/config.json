@@ -1,0 +1,47 @@
+{
+  "raw_validation": {
+    "base_folder": "raw",
+    "subfolders": {
+      "folder1": {
+        "required_columns": ["column1", "column2", "column3"]
+      },
+      "folder2": {
+        "required_columns": ["id", "name", "value"]
+      },
+      "folder3": {
+        "required_columns": ["timestamp", "data"]
+      }
+    }
+  },
+  "source_validation": {
+    "base_folder": "source",
+    "subfolders": {
+      "users": {
+        "files": {
+          "users.csv": {
+            "columns": {
+              "id": { "type": "int", "nullable": false },
+              "name": { "type": "str", "nullable": false },
+              "email": { "type": "str", "nullable": false },
+              "age": { "type": "int", "nullable": true },
+              "created_at": { "type": "datetime", "nullable": false }
+            }
+          }
+        }
+      },
+      "products": {
+        "files": {
+          "products.csv": {
+            "columns": {
+              "id": { "type": "int", "nullable": false },
+              "name": { "type": "str", "nullable": false },
+              "price": { "type": "float", "nullable": false },
+              "quantity": { "type": "int", "nullable": true },
+              "active": { "type": "bool", "nullable": false }
+            }
+          }
+        }
+      }
+    }
+  }
+}
