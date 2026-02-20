@@ -1,0 +1,4 @@
+error_level,error_text,file_name,folder_name,line_number,value_type,value
+error,Folder 'folder1' does not contain any file,,raw/folder1,0,,
+error,Required folder 'folder2' is missing,,raw/folder2,0,,
+error,Required folder 'folder3' is missing,,raw/folder3,0,,

@@ -1,9 +1,0 @@
-id,name,email,age,created_at
-1,John Doe,john@example.com,30,2024-01-15
-2,Jane Smith,jane@example.com,,2024-01-16
-3,Bob Johnson,bob@example.com,25,2024-01-17
-4,Alice Brown,,28,2024-01-18
-5,Charlie Davis,charlie@example.com,invalid_age,2024-01-19
-6,Eve Wilson,eve@example.com,35,not-a-date
-7,Frank Miller,frank@example.com,-5,2024-01-20
-8,,empty@test.com,40,2024-01-21

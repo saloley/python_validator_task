@@ -1,10 +1,3 @@
-"""
-File Validation Service
-
-Modular validation service for CSV files with support for:
-- RAW validation: folder structure and required columns
-- SOURCE validation: file schemas, data types, nullable constraints
-"""
 
 __version__ = "0.2.0"
 __author__ = "Your Name"
