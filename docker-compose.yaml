@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  validation-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: file-validation-service
+    volumes:
+      - ./src/files:/app/src/files
+      - ./.env:/app/.env
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: python -m src.validation_service.run_valid_to_chek
